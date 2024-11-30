@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface UserRepository {
     Optional<User> findByEmail(Email email);
-    User create(User user);
+    void create(User user);
 }
