@@ -7,7 +7,9 @@ import com.payments.user.domain.valueobjects.Email;
 import com.payments.user.domain.valueobjects.IdentificationNumber;
 import com.payments.user.domain.valueobjects.PhoneNumber;
 
-public interface CreateUserUseCase extends UseCase<CreateUserInput, CreateUserOutput> {
+public interface CreateUserUseCase extends UseCase<CreateUserInput, String> {
+
+    String execute(CreateUserInput input);
 
     class DefaultCreateUserUseCase implements CreateUserUseCase {
         private final UserRepository userRepository;
@@ -17,7 +19,7 @@ public interface CreateUserUseCase extends UseCase<CreateUserInput, CreateUserOu
         }
 
         @Override
-        public CreateUserOutput execute(CreateUserInput input) {
+        public String execute(CreateUserInput input) {
             if (this.userRepository.findByEmail(Email.of(input.email())).isPresent())
                 throw new IllegalArgumentException("Email already exists");
 
@@ -27,8 +29,9 @@ public interface CreateUserUseCase extends UseCase<CreateUserInput, CreateUserOu
 
             final User user = User.newUser(input.fullName(), identificationNumber, email, input.birthDate(), phoneNumber);
 
-            User createdUser = this.userRepository.create(user);
-            return CreateUserOutput.from(createdUser);
+            userRepository.create(user);
+
+            return "User created successfully";
         }
     }
 }

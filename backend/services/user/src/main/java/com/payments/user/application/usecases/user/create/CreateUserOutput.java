@@ -31,7 +31,7 @@ public record CreateUserOutput(
                 user.getFullName(),
                 user.getIdentificationNumber().getValue(),
                 user.getEmail().getValue(),
-                user.getDateOfBirth(),
+                user.getBirthDate(),
                 user.getPhoneNumber().getValue(),
                 user.getCreatedAt()
         );
