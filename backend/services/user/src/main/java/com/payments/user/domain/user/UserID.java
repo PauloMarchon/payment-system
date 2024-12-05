@@ -6,9 +6,9 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class UserID extends Identifier {
-    private final String value;
+    private final UUID value;
 
-    public UserID(final String value) {
+    public UserID(final UUID value) {
         Objects.requireNonNull(value);
         this.value = value;
     }
@@ -18,15 +18,15 @@ public class UserID extends Identifier {
     }
 
     public static UserID from(final String value) {
-        return new UserID(value);
+        return new UserID(UUID.fromString(value));
     }
 
     public static UserID from(final UUID value) {
-        return new UserID(value.toString());
+        return new UserID(value);
     }
 
     @Override
-    public String getValue() {
+    public UUID getValue() {
         return value;
     }
 

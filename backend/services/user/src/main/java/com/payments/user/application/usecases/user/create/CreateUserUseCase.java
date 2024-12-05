@@ -31,7 +31,7 @@ public interface CreateUserUseCase extends UseCase<CreateUserInput, String> {
 
             userRepository.create(user);
 
-            return "User created successfully";
+            return user.getId().getValue().toString();
         }
     }
 }

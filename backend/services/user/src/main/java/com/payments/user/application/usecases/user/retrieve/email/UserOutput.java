@@ -16,7 +16,7 @@ public record UserOutput(
 ) {
     public static UserOutput from(User user) {
         return new UserOutput(
-                user.getId().getValue(),
+                user.getId().getValue().toString(),
                 user.getFullName(),
                 user.getIdentificationNumber().getValue(),
                 user.getEmail().getValue(),
