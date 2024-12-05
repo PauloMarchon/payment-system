@@ -1,0 +1,24 @@
+services:
+
+  postgres:
+    image: postgres:latest
+    container_name: userpay_postgres
+    environment:
+      POSTGRES_DB: payments_user_db
+      POSTGRES_USER: payments
+      POSTGRES_PASSWORD: payments
+      PGDATA: /data/postgres
+    volumes:
+      - userpay-data:/data/postgres
+    ports:
+      - "5433:5432"
+    networks:
+      - payments-user
+    restart: unless-stopped
+
+volumes:
+  userpay-data:
+
+networks:
+  payments-user:
+    driver: bridge

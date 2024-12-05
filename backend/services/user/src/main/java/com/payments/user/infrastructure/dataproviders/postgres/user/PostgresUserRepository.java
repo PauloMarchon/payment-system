@@ -6,6 +6,7 @@ import com.payments.user.domain.valueobjects.Email;
 import com.payments.user.infrastructure.mapper.UserRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.sql.Timestamp;
 import java.util.Optional;
 
 public class PostgresUserRepository implements UserRepository {
@@ -22,7 +23,7 @@ public class PostgresUserRepository implements UserRepository {
         var sql = """
                 SELECT *
                 FROM users u
-                WHERE u.email = :email
+                WHERE u.email = ?
                 """;
         return jdbcTemplate.query(sql, userRowMapper, email.getValue())
                 .stream()
@@ -43,7 +44,7 @@ public class PostgresUserRepository implements UserRepository {
                 user.getEmail().getValue(),
                 user.getBirthDate(),
                 user.getPhoneNumber().getValue(),
-                user.getCreatedAt()
+                Timestamp.from(user.getCreatedAt())
         );
     }
 }

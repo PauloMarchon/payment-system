@@ -1,2 +1,9 @@
 server:
   port: 8082
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/payments_user_db
+    username: payments
+    password: payments
+    driver-class-name: org.postgresql.Driver

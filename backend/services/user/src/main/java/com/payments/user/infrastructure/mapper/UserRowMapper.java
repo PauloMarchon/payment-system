@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.time.LocalDate;
 
 @Component
@@ -24,7 +23,7 @@ public class UserRowMapper implements RowMapper<User> {
                 Email.of(rs.getString("email")),
                 rs.getObject("birth_date", LocalDate.class),
                 PhoneNumber.of(rs.getString("phone_number")),
-                rs.getObject("created_at", Instant.class)
+                rs.getTimestamp("created_at").toInstant()
         );
     }
 }
